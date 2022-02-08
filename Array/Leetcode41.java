@@ -3,10 +3,7 @@
 // My solution (Java) using cyclic sort
 
 class Solution {
-    public int firstMissingPositive(int[] arr) {
-        
-        //edge case if arr contain all continuous positives after sorting like {1,2,3} ans = 4
-              
+    public int firstMissingPositive(int[] arr) {      
         CyclicSort(arr);
         //System.out.println(Arrays.toString(arr));
         int ans =0;
@@ -19,6 +16,8 @@ class Solution {
             }
         }
         //System.out.println(ans);
+        //edge case if arr contain all continuous positives after sorting like {1,2,3} ans = 4
+        
         if (flag)
             return arr[arr.length-1]+1;
         return ans;
