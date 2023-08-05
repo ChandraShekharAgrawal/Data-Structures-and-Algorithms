@@ -1,5 +1,9 @@
+// following program checks if a 9*9 sudoku is valid or not
+// you can add your values of sudoku instead of already placed values in arr
+// I like solving sudokus. So, I've created this program to check if I'm solving correctly or not
+
 import java.util.*;
-class Main{
+class ValidSudoku{
     public static void main (String[] args){
         int[][] arr = {{1,4, 7,3,5,2,9,8,6},
                         {2,6,8,4,9,1,7,3,5},
