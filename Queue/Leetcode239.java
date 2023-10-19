@@ -42,3 +42,30 @@ class Solution {
 }
 
 // we can solve it using deque as well
+/*
+class Solution {
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        int n = nums.length;
+        int[] ans = new int[n-k+1];
+        Deque<Integer> maxIndex = new LinkedList<>();
+        for(int i=0; i<k; i++){
+            while(maxIndex.size()!=0 && nums[maxIndex.peekLast()] <= nums[i]){
+                maxIndex.removeLast();
+            }
+            maxIndex.addLast(i);
+        }
+        ans[0] = nums[maxIndex.peekFirst()];
+        for(int i=k; i<n; i++){
+            if(maxIndex.peekFirst() == i-k){
+                maxIndex.removeFirst();
+            }
+            while(maxIndex.size()!=0 && nums[maxIndex.peekLast()] <= nums[i]){
+                maxIndex.removeLast();
+            }
+            maxIndex.addLast(i);
+            ans[i-k+1] = nums[maxIndex.peekFirst()];
+        }
+        return ans;
+    }
+}
+*/
