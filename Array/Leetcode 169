@@ -1,0 +1,25 @@
+// Problem Statement - Leetcode 169 - https://leetcode.com/problems/majority-element
+
+// My Solution
+
+class Solution {
+    public int majorityElement(int[] nums) {
+        // Boyer–Moore majority vote algorithm
+        int n = nums.length;
+        int majorCount = 1;
+        int majorElement = nums[0];
+        for(int i=1; i<n; i++){
+            if(nums[i] == majorElement){
+                majorCount++;
+            }
+            else{
+                majorCount--;
+                if(majorCount < 0){
+                    majorElement = nums[i];
+                    majorCount = 1;
+                }
+            }
+        }
+        return majorElement;
+    }
+}
