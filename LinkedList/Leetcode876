@@ -1,0 +1,36 @@
+// Problem Statement - Leetcode 876 - https://leetcode.com/problems/middle-of-the-linked-list
+
+// My Solution using two pointers
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode middleNode(ListNode head) {
+        int countNodes = 0;
+        ListNode slowNode = head;
+        ListNode fastNode = head;
+        while(fastNode.next != null){
+            if(fastNode.next != null){
+                countNodes++;
+                fastNode = fastNode.next;
+            }
+            if(fastNode.next != null){
+                countNodes++;
+                fastNode = fastNode.next;
+                slowNode = slowNode.next;
+            }
+        }
+        if((countNodes & 1) > 0){
+            return slowNode.next;
+        }
+        return slowNode;
+    }
+}
