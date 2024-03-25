@@ -1,37 +1,27 @@
-// https://leetcode.com/problems/find-the-duplicate-number/
+// Problem Statement - Leetcode 287 -  https://leetcode.com/problems/find-the-duplicate-number/
 
-// My Solution (Java) using cyclic sort
+// My Solution. It is not intuitive at all. Can't come up with this in an interview.
 
 class Solution {
     public int findDuplicate(int[] nums) {
-        CyclicSort(nums);
-        int ans =0;
-        for(int i=0; i<nums.length; i++){
-            if(nums[i]!= i+1){
-                ans = nums[i];
+        int n = nums.length;
+
+        // we are trying to find a cycle using floyd's algo - hare and tortoise algo
+        int slow = nums[0];
+        int fast = nums[0];
+        while(true){
+            slow = nums[slow];
+            fast = nums[nums[fast]];
+            if(slow == fast){
                 break;
             }
         }
-        return ans;
-    }
-    
-    void CyclicSort(int[] arr){
-        int i = 0;
-        while(i < arr.length){
-            int correctindex = arr[i]-1;
-            
-            if(arr[i]!= arr[correctindex]){
-                swap(arr, i, correctindex);
-            }
-            else{
-                i++;
-            }
+        
+        fast = nums[0];
+        while(slow != fast){
+            slow = nums[slow];
+            fast = nums[fast];
         }
-    }
-    
-    void swap(int[] arr, int a, int b){
-        int temp = arr[a];
-        arr[a] = arr[b];
-        arr[b] = temp;
+        return fast;
     }
 }
