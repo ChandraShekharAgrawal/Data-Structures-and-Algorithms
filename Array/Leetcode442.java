@@ -1,36 +1,20 @@
-// https://leetcode.com/problems/find-all-duplicates-in-an-array/
+// Problem Statement - Leetcode 442 - https://leetcode.com/problems/find-all-duplicates-in-an-array
 
-// My Solution (Java) using cyclic sort
+// My Solution
 
 class Solution {
     public List<Integer> findDuplicates(int[] nums) {
-        CyclicSort(nums);
-        List <Integer> ans = new ArrayList<Integer>();
-        for(int i=0; i< nums.length; i++){
-            if(nums[i]!= i+1){
-                ans.add(nums[i]);
-            }
-        }
-        return ans;
-    }
-    
-    public void CyclicSort(int[] arr){
-        int i = 0;
-        while(i < arr.length){
-            int correctindex = arr[i]-1;
-
-            if(arr[i]!= arr[correctindex]){
-                swap(arr, i, correctindex);
+        int n = nums.length;
+        List<Integer> duplicateList = new ArrayList<>();
+        for(int i=0; i<n; i++){
+            int indexToModify = (Math.abs(nums[i])) - 1;
+            if(nums[indexToModify] < 0){
+                duplicateList.add(indexToModify + 1);
             }
             else{
-                i++;
+                nums[indexToModify] = 0 - nums[indexToModify];
             }
         }
-    }
-
-    public void swap(int[] arr, int a, int b){
-        int temp = arr[a];
-        arr[a] = arr[b];
-        arr[b] = temp;
+        return duplicateList;
     }
 }
