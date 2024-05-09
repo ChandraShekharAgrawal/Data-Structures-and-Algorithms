@@ -5,38 +5,27 @@
 class Solution {
     public boolean checkValidString(String s) {
         int n = s.length();
-        Stack<Integer> openBracket = new Stack<>();
-        Stack<Integer> special = new Stack<>();
+        int openBracket = 0;
+        int closeBracket = 0;
         for(int i=0; i<n; i++){
-            char ch = s.charAt(i);
-            if(ch == '('){
-                openBracket.push(i);
+            char front = s.charAt(i);
+            char back = s.charAt(n-1-i);
+            if(front == '(' || front == '*'){
+                openBracket++;
             }
-            else if(ch == '*'){
-                special.push(i);
+            else if(front == ')'){
+                openBracket--;
             }
-            else{
-                if(openBracket.size() == 0 && special.size() == 0){
-                    return false;
-                }
-                else if(openBracket.size() != 0){
-                    openBracket.pop();
-                }
-                else {
-                    special.pop();
-                }
+            if(back == ')' || back == '*'){
+                closeBracket++;
             }
-        }
-        while(openBracket.size() != 0 && special.size() != 0){
-            if(openBracket.peek() > special.peek()){
+            else if(back == '('){
+                closeBracket--;
+            }
+            if(openBracket <0 || closeBracket < 0){
                 return false;
             }
-            openBracket.pop();
-            special.pop();
         }
-        if(openBracket.size() == 0){
-            return true;
-        }
-        return false;
+        return true;
     }
 }
