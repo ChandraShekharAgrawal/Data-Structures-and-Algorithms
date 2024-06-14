@@ -1,0 +1,21 @@
+// Problem Statement - Leetcode 945 - https://leetcode.com/problems/minimum-increment-to-make-array-unique
+
+// My Solution
+
+class Solution {
+    public int minIncrementForUnique(int[] nums) {
+        Arrays.sort(nums);
+        int countChange = 0;
+        int prev = nums[0];
+        for(int i=1; i<nums.length; i++){
+            if(nums[i] <= prev){
+                countChange += (prev - nums[i] + 1);
+                prev++;
+            }
+            else{
+                prev = nums[i];
+            }
+        }
+        return countChange;
+    }
+}
